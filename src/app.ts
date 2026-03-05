@@ -10,10 +10,17 @@ import cartRoutes from "./routes/cart.routes";
 import orderRoutes from "./routes/order.routes";
 import featuredRoutes from "./routes/featured.routes";
 
+import cors from "cors"
+
+
+
 const app = express();
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
 
-app.use(express.json());
+
+app.use(cors({
+  origin: "*"
+}))
 
 app.get("/", (_req: Request, res: Response) => {
   res.json({ message: "Ecommerce API is running" });

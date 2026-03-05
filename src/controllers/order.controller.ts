@@ -1,5 +1,5 @@
 import { Response } from "express";
-import {prisma} from "../lib/prisma";
+import { prisma } from "../lib/prisma";
 import { AuthRequest } from "../middleware/auth.middleware";
 
 /**
@@ -7,7 +7,6 @@ import { AuthRequest } from "../middleware/auth.middleware";
  */
 export const createOrder = async (req: AuthRequest, res: Response) => {
   try {
-
     const { paymentMethod, shippingAddress } = req.body;
 
     const cart = await prisma.cart.findUnique({
@@ -25,7 +24,7 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
       return res.status(400).json({ message: "Cart is empty" });
     }
 
-    const totalAmount = cart.items.reduce((sum, item) => {
+    const totalAmount = cart.items.reduce((sum: number, item) => {
       return sum + item.product.price * item.quantity;
     }, 0);
 
@@ -68,7 +67,6 @@ export const createOrder = async (req: AuthRequest, res: Response) => {
   }
 };
 
-
 /**
  * GET MY ORDERS
  */
@@ -95,7 +93,6 @@ export const getMyOrders = async (req: AuthRequest, res: Response) => {
     res.status(500).json({ message: "Failed to fetch orders", error });
   }
 };
-
 
 /**
  * GET SINGLE ORDER

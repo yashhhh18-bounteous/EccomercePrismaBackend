@@ -23,9 +23,9 @@ export const getCart = async (req: AuthRequest, res: Response) => {
       return res.json({ items: [], total: 0 });
     }
 
-    const total = cart.items.reduce((sum, item) => {
-      return sum + item.product.price * item.quantity;
-    }, 0);
+    const total = cart.items.reduce((sum: number, item: any) => {
+  return sum + item.totalPrice;
+}, 0);
 
     res.json({ cart, total });
 

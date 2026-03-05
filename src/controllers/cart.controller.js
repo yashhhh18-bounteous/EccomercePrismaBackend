@@ -18,7 +18,7 @@ export const getCart = async (req, res) => {
             return res.json({ items: [], total: 0 });
         }
         const total = cart.items.reduce((sum, item) => {
-            return sum + item.product.price * item.quantity;
+            return sum + item.totalPrice;
         }, 0);
         res.json({ cart, total });
     }
